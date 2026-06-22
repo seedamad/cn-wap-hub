@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>麻将胡了 · 日常查询与对照指南</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f0f6f9;
+            color: #1a2b34;
+            line-height: 1.6;
+            padding: 0 16px 32px;
+        }
+        .page {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* hero 区 */
+        .hero {
+            background: linear-gradient(145deg, #0f4c5c 0%, #1b6b7c 100%);
+            border-radius: 32px 32px 24px 24px;
+            padding: 40px 24px 36px;
+            margin: 24px 0 20px;
+            color: white;
+            box-shadow: 0 12px 28px rgba(15, 76, 92, 0.20);
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+        .hero p {
+            font-size: 1rem;
+            opacity: 0.90;
+            max-width: 90%;
+            margin-bottom: 16px;
+        }
+        .hero .tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(4px);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #d7f2f5;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        /* 网格卡片系统 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 22px 0;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 16px 18px;
+            box-shadow: 0 4px 12px rgba(0,40,50,0.06);
+            border: 1px solid #deedf2;
+            transition: transform 0.1s ease;
+        }
+        .card:active { transform: scale(0.97); }
+        .card .icon {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #0f4c5c;
+        }
+        .card p {
+            font-size: 0.9rem;
+            color: #3a535e;
+        }
+        .card-full {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: 20px;
+            padding: 20px 18px;
+            border: 1px solid #deedf2;
+            box-shadow: 0 4px 12px rgba(0,40,50,0.06);
+        }
+
+        /* 说明区（扩展阅读） */
+        .explain {
+            background: white;
+            border-radius: 24px;
+            padding: 24px 20px;
+            margin: 16px 0 20px;
+            border: 1px solid #d0e4eb;
+        }
+        .explain h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0f4c5c;
+            border-left: 5px solid #3b9aab;
+            padding-left: 14px;
+            margin-bottom: 16px;
+        }
+        .explain p {
+            margin-bottom: 14px;
+            font-size: 0.96rem;
+        }
+        .explain p:last-child { margin-bottom: 0; }
+        .explain strong {
+            color: #1a6b7c;
+        }
+
+        /* FAQ 摘要 */
+        .faq-summary {
+            background: #e5f1f5;
+            border-radius: 24px;
+            padding: 20px 20px 10px;
+            margin: 20px 0;
+            border: 1px solid #c7dce4;
+        }
+        .faq-summary h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0f4c5c;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .faq-item {
+            margin-bottom: 16px;
+        }
+        .faq-item .q {
+            font-weight: 600;
+            color: #1a4c58;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .faq-item .a {
+            font-size: 0.92rem;
+            color: #2b4b56;
+        }
+
+        /* 底部链接区 */
+        .footer-links {
+            background: white;
+            border-radius: 24px;
+            padding: 20px 20px 18px;
+            margin: 8px 0 26px;
+            border: 1px solid #d0e4eb;
+            text-align: center;
+        }
+        .footer-links p {
+            font-size: 0.95rem;
+            color: #1f3d47;
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #1b7a8a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid rgba(27,122,138,0.15);
+            transition: border 0.15s;
+        }
+        .footer-links a:hover {
+            border-bottom-color: #1b7a8a;
+        }
+        .footer-links .small-note {
+            display: block;
+            font-size: 0.8rem;
+            color: #6b8994;
+            margin-top: 10px;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { max-width: 100%; }
+            .card-grid { gap: 12px; }
+            .card { padding: 16px 14px; }
+        }
+        @media (min-width: 700px) {
+            body { padding: 0 24px 40px; }
+            .card-grid { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>麻将胡了 · 查询对照</h1>
+        <p>聚合日常规则、番型速查与延伸阅读，适合牌局间隙或复盘时随手翻阅。</p>
+        <span class="tag">📖 落地参考 · 不止于速查</span>
+    </div>
+
+    <!-- 优势区：网格卡片（4张） -->
+    <div class="card-grid">
+        <div class="card">
+            <span class="icon">📋</span>
+            <h3>番型速查</h3>
+            <p>国标、川麻、日本立直等常见番种简明对照，减少争议。</p>
+        </div>
+        <div class="card">
+            <span class="icon">🔍</span>
+            <h3>术语延伸</h3>
+            <p>从“门前清”到“九莲宝灯”，关键术语背景注解。</p>
+        </div>
+        <div class="card">
+            <span class="icon">💡</span>
+            <h3>局后笔记</h3>
+            <p>记录手牌效率、听牌形态，积累个人牌感库。</p>
+        </div>
+        <div class="card">
+            <span class="icon">📚</span>
+            <h3>阅读关联</h3>
+            <p>由基础推及变体，适合想了解规则细节的玩家。</p>
+        </div>
+    </div>
+
+    <!-- 说明区：从日常查询与对照角度切入 -->
+    <div class="explain">
+        <h2>日常查询 · 对照 · 延伸阅读</h2>
+        <p>
+            许多麻将爱好者在实战中常遇到同分不同番、番种混淆的情况。<strong>麻将胡了</strong>作为一款轻量的规则参考工具，
+            致力于将零散的番型定义、计分规则与常见牌型整理为清晰条目。页面内容取自多版本规则通识，并融合了部分地方玩法注解，
+            帮助玩家快速定位差异。
+        </p>
+        <p>
+            例如“字一色”与“绿一色”的牌面构成，“杠上开花”与“海底捞月”的番种叠加方式——在 
+            <a href="https://cn-wap-mahjong.com">麻将胡了</a> 中均以对照表形式呈现。
+            同时附有简短术语词条，适合在手机端直接翻阅，无需切换多标签页。
+        </p>
+        <p>
+            此外，本站收录了少量进阶阅读材料：包括听牌概率简表、常见役种组合优先级、以及各地番种换算参考。
+            所有内容均保持中立，仅作信息整理，不涉及胜负承诺或策略诱导。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要（3条） -->
+    <div class="faq-summary">
+        <h2>❓ FAQ 摘要</h2>
+        <div class="faq-item">
+            <span class="q">Q：番种冲突时如何取舍？</span>
+            <span class="a">A：多数规则遵循“不重复计番、就高不就低”原则。具体可参照页面内“番种叠加对照”。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">Q：地方规则差异影响大吗？</span>
+            <span class="a">A：部分番种（如“无番胡”“推倒胡”）在不同地区定义不同，建议结合当地通用规则核对。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">Q：页面内容会更新吗？</span>
+            <span class="a">A：会随规则讨论与玩家反馈逐步补充，保持简明实用。欢迎持续使用参考。</span>
+        </div>
+    </div>
+
+    <!-- 底部链接 -->
+    <div class="footer-links">
+        <p>
+            如需查阅完整番型表与术语索引，可前往 
+            <a href="https://cn-wap-mahjong.com">麻将胡了</a> 
+            查看持续整理的对照内容。
+        </p>
+        <span class="small-note">信息整理供参考 · 具体以当地规则或赛事规程为准</span>
+    </div>
+
+</div>
+</body>
+</html>
